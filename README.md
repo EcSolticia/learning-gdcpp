@@ -2,7 +2,7 @@
 This repository serves as a quickstart template for GDExtension development with Godot 4.0+.
 
 ## Contents
-* An empty Godot project (`demo/`)
+* An empty Godot project (`game/`)
 * godot-cpp as a submodule (`godot-cpp/`)
 * GitHub Issues template (`.github/ISSUE_TEMPLATE.yml`)
 * GitHub CI/CD workflows to publish your library packages when creating a release (`.github/workflows/builds.yml`)
@@ -19,9 +19,9 @@ For getting started after cloning your own copy to your local machine, you shoul
 * initialize the godot-cpp git submodule via `git submodule update --init`
 * change the name of your library
   * change the name of the compiled library file inside the `SConstruct` file by modifying the `libname` string.
-  * change the pathnames of the to be loaded library name inside the `demo/bin/example.gdextension` file. By replacing `libgdexample` to the name specified in your `SConstruct` file.
-  * change the name of the `demo/bin/example.gdextension` file
-* change the `entry_symbol` string inside your `demo/bin/your-extension.gdextension` file to be configured for your GDExtension name. This should be the same as the `GDExtensionBool GDE_EXPORT` external C function. As the name suggests, this sets the entry function for your GDExtension to be loaded by the Godot editors C API.
+  * change the pathnames of the to be loaded library name inside the `game/bin/learning.gdextension` file. By replacing `libgdlearning` to the name specified in your `SConstruct` file.
+  * change the name of the `game/bin/learning.gdextension` file
+* change the `entry_symbol` string inside your `game/bin/your-extension.gdextension` file to be configured for your GDExtension name. This should be the same as the `GDExtensionBool GDE_EXPORT` external C function. As the name suggests, this sets the entry function for your GDExtension to be loaded by the Godot editors C API.
 * register the classes you want Godot to interact with inside the `register_types.cpp` file in the initialization method (here `initialize_gdextension_types`) in the syntax `GDREGISTER_CLASS(CLASS-NAME);`.
 
 ## Usage - Actions
@@ -29,15 +29,15 @@ For getting started after cloning your own copy to your local machine, you shoul
 This repository comes with a GitHub action that builds the GDExtension for cross-platform use. It triggers automatically for each pushed change. You can find and edit it in [builds.yml](.github/workflows/builds.yml).
 After a workflow run is complete, you can find the file `godot-cpp-template.zip` on the `Actions` tab on GitHub.
 
-Note: for macos, you will have to build the binary as a `.dylib` in a `EXTENSION-NAME.framework` folder. The framework folder should also have a `Resources` folder with a file called `Info.plist`. Without this file, signing will fail.
+Note: for macos, you will have to build the binary as a `.dylib` in a `learning.framework` folder. The framework folder should also have a `Resources` folder with a file called `Info.plist`. Without this file, signing will fail.
 
 Note: for iOS, the same should be as for MacOS, however the `Info.plist` file needs to be close to the `.dylib`, instead of in a `Resources` folder (If this is not done, the build will fail to upload to the App Store).
 
 So, in our case, the builds should be:
 
 ```sh
-bin/EXTENSION-NAME.macos.template_debug.framework/EXTENSION-NAME.macos.template_release
-bin/EXTENSION-NAME.ios.template_debug.framework/EXTENSION-NAME.ios.template_release.arm64.dylib
+bin/learning.macos.template_debug.framework/learning.macos.template_release
+bin/learning.ios.template_debug.framework/learning.ios.template_release.arm64.dylib
 
 Afterwards, you want to set in the `.gdextension` file the paths to the `.framework` folder, instead of the `.dylib` file (Note that for the `.dylib` binary, the extension is not needed, you could have a file without any extension and it would still work).
 
@@ -59,7 +59,7 @@ As you can see, this action requires some secrets to be configured in order to r
 ## Configuration - Mac Signing Secrets
 
 In order to sign the Mac binary, you need to configure the following secrets:
-`APPLE_CERT_BASE64`, `APPLE_CERT_PASSWORD`, `APPLE_DEV_PASSWORD`, `APPLE_DEV_ID`, `APPLE_DEV_TEAM_ID`, `APPLE_DEV_APP_ID`. These secrets are stored in the example above in the Github secrets for repositories. The names of the secrets have to match the names of the secrets you use for your action. For more on this, read the [Creating secrets for a repository](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) article from Github.
+`APPLE_CERT_BASE64`, `APPLE_CERT_PASSWORD`, `APPLE_DEV_PASSWORD`, `APPLE_DEV_ID`, `APPLE_DEV_TEAM_ID`, `APPLE_DEV_APP_ID`. These secrets are stored in the learning above in the Github secrets for repositories. The names of the secrets have to match the names of the secrets you use for your action. For more on this, read the [Creating secrets for a repository](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) article from Github.
 
 These secrets are then passed down to the `godotengine/godot-cpp-template/.github/actions/sign@main` action that signs the binary.
 
@@ -67,7 +67,7 @@ In order to configure these secrets, you will need:
 
 - A Mac
 - An Apple ID enrolled in Apple Developer Program (99 USD per year)
-- A `Resources/Info.plist` in the `framework` folder. Take the one in this project as an example. Be careful to set CFBundleExecutable to the **EXACT** lib name, otherwise it won't work. Also, don't put strange names in the CFBundleName and other such places. Try to only use letters and spaces. Errors will be extremly vague if not impossible to debug.
+- A `Resources/Info.plist` in the `framework` folder. Take the one in this project as an learning. Be careful to set CFBundleExecutable to the **EXACT** lib name, otherwise it won't work. Also, don't put strange names in the CFBundleName and other such places. Try to only use letters and spaces. Errors will be extremly vague if not impossible to debug.
 
 For the actions you will need to set the following inputs. Store them as secrets in GitHub:
 
@@ -128,7 +128,7 @@ base64 -i Certificates.p12 -o Certificates.base64
 Eg.
 - `APPLE_CERT_BASE64` = `...`(A long text file)
 
-After these secrets are obtained, all that remains is to set them in Github secrets and then use them in the Github action, eg. in the above Github action usage example, this part:
+After these secrets are obtained, all that remains is to set them in Github secrets and then use them in the Github action, eg. in the above Github action usage learning, this part:
 
 ```
 - name: Mac Sign

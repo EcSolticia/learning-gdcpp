@@ -5,6 +5,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "gravity_calculator.h"
+#include "gobject.h"
 
 using namespace godot;
 
@@ -14,6 +15,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 	GDREGISTER_CLASS(GravityCalculator);
+	GDREGISTER_CLASS(Gobject);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

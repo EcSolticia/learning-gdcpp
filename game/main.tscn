@@ -4,5 +4,3 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hvalh")
-
-[node name="GravityCalculator" type="GravityCalculator" parent="."]

@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfouc8idtog7k"]
+[gd_scene load_steps=4 format=3 uid="uid://bfouc8idtog7k"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hvalh"]
+[ext_resource type="Script" path="res://gravity_calculator.gd" id="2_dp6q8"]
+[ext_resource type="Texture2D" uid="uid://dbx66sovxd1" path="res://icon.svg" id="2_ltop1"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hvalh")
+
+[node name="GravityCalculator" type="GravityCalculator" parent="."]
+G = 10000.0
+script = ExtResource("2_dp6q8")
+
+[node name="Gobject2" type="Gobject" parent="GravityCalculator"]
+position = Vector2(645, 441)
+
+[node name="Icon" type="Sprite2D" parent="GravityCalculator/Gobject2"]
+texture = ExtResource("2_ltop1")
+
+[node name="Gobject" type="Gobject" parent="GravityCalculator"]
+position = Vector2(258, 354)
+
+[node name="Icon" type="Sprite2D" parent="GravityCalculator/Gobject"]
+texture = ExtResource("2_ltop1")

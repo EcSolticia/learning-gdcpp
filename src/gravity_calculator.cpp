@@ -61,8 +61,4 @@ GravityCalculator::GravityCalculator() {
 }
 
 void GravityCalculator::_physics_process(double delta) {
-
-    
-    apply_accel_to_all(delta);
-
 }

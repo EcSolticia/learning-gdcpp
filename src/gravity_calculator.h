@@ -26,6 +26,4 @@ public:
     double get_G();
 
     GravityCalculator();
-
-    void _physics_process(double delta) override;
 };
